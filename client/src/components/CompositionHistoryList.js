@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 export default function CompositionHistoryList() {
   const [users, setUsers] = useState([]);
@@ -26,12 +27,12 @@ export default function CompositionHistoryList() {
         {users.map((user) => {
           return (
             <div key={user._id} >
-              {/* <Link to={`/projects/${user._id}`}> */}
+              <Link to={`/compositionHistory/${user._id}`}>
                 <h2>{user.username}</h2>
                 <h3>{user.location}</h3>
                 <h4>{user.createdAt}</h4>
                 {/* SLICE CREATED TIME BABY!! */}
-              {/* </Link> */}
+              </Link>
             </div>
           );
         })}     
