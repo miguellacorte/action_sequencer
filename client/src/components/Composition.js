@@ -2,7 +2,16 @@ import React from "react";
 import * as Tone from "tone";
 import Sketch from "react-p5";
 
-export default function Composition() {
+export default function Composition({
+  userNotes,
+  setUserNotes,
+  userDrawingX,
+  setUserDrawingX,
+  userDrawingY,
+  setUserDrawingY,
+  setShowModal,
+  showModal,
+}) {
   let setup = (p5, canvasParentRef) => {
     let canvas = p5
       .createCanvas(p5.windowWidth, p5.windowHeight)
@@ -15,15 +24,15 @@ export default function Composition() {
 
   Tone.Destination.volume.value = -15;
 
-  let revWet = 0.3;
+  let revWet = 1;
   let reverb = new Tone.Reverb([1]).toDestination();
   reverb.wet.rampTo(revWet, 3);
 
-  let chorusDelayTime = 880;
+  let chorusDelayTime = 400;
   let chorus = new Tone.Chorus(20, chorusDelayTime, 1).toDestination();
   chorus.wet.value = 1;
 
-  let feedback = 0.5;
+  let feedback = 1;
   let pingPong = new Tone.PingPongDelay("16n", feedback).toDestination();
 
   synth.connect(chorus);
@@ -45,6 +54,9 @@ export default function Composition() {
     let mouseY = p5.mouseY;
     let width = p5.windowWidth;
     let height = p5.windowHeight;
+
+    console.log(drawingCoordinatesX);
+    console.log(drawingCoordinatesY);
 
     audioStart();
 
@@ -222,19 +234,45 @@ export default function Composition() {
     let mouseY = p5.mouseY;
     let pmouseX = p5.pmouseX;
     let pmouseY = p5.pmouseY;
-   
+
     if (p5.mouseIsPressed === true) {
       p5.strokeWeight(4);
       p5.fill(230, 0, 0);
       p5.line(pmouseX - 3, pmouseY + 3, mouseX, mouseY);
     }
+  };
 
+  const handleNotes = (event) => {
+    setUserNotes((userNotes = notes));
+  };
+
+  const handleDrawingX = (event) => {
+    setUserDrawingX((userDrawingX = drawingCoordinatesX));
+  };
+
+  const handleDrawingY = (event) => {
+    setUserDrawingY((userDrawingY = drawingCoordinatesY));
+  };
+
+  const handleModal = (event) => {
+    setShowModal(showModal = true);
   };
 
   return (
     <div>
       <h1>WORKING</h1>
       <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />
+      <button
+        onClick={() => {
+          handleNotes();
+          handleDrawingY();
+          handleDrawingX();
+          handleModal();
+        }}
+      >
+        {" "}
+        Save Composition{" "}
+      </button>
     </div>
   );
 }

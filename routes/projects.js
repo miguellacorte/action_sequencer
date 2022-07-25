@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Sequence = require ("../models/Sequence")
 const User = require ("../models/User")
 
 router.get("/", (req, res, next) => {
@@ -10,8 +9,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const {username, password, email, location, sequencers} = req.body
-  User.create({username, password, email, location, sequencers})
+  const {username, password, email, location } = req.body
+  User.create({username, password, email, location })
   .then(user => {
     res.status(201).json(user)
   })

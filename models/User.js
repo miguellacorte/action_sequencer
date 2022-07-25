@@ -1,25 +1,32 @@
 const { Schema, model, default: mongoose } = require("mongoose");
-const Sequence = require("../models/Sequence");
+// const Sequence = require("../models/Sequence");
 
 const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true ,
-      required: true
+      unique: true,
+      required: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      unique: true 
+      unique: true,
     },
     location: {
       type: String,
     },
-    sequencers: [],
+  },
+  {
+    composition: {
+      notes: [String],
+      drawingX: [Number],
+      drawingY: [Number],
+      timestamps: true,
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

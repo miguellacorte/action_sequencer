@@ -1,12 +1,22 @@
 import React from 'react'
-import CompositionHistoryList from '../components/CompositionHistoryList'
+import ParticipationHistoryList from '../components/ParticipationHistoryList'
+import { Link } from 'react-router-dom'
+import Login from '../components/Login'
 
-export default function Home() {
+export default function Home({ users }) {
   return (
     <div>
 
     <h1>home</h1>
-    <CompositionHistoryList /> 
+    <ParticipationHistoryList users= {users}/> 
+
+    <Link to="/playground">
+            <button>create your own participation</button>
+    </Link>
+
+    <Login />
+
+    
 
     </div>
     
