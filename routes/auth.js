@@ -55,10 +55,11 @@ router.post("/login", (req, res, next) => {
   }
 
   User.findOne({ email })
-  .then(foundUser => {
+  .then(foundUser => {  
+    console.log(foundUser)
     if (!foundUser) {
         res.status(400).json({ message: "user not found" });
-        return
+        return 
   };
  const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
  if (passwordCorrect){

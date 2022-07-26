@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import Composition from '../components/Composition'
+import CompositionRecall from '../components/CompositionRecall'
 import { useParams } from 'react-router-dom';
 
 
@@ -9,21 +9,22 @@ import { useParams } from 'react-router-dom';
 export default function ParticipationRecall({ users }) {
  let userID = useParams().id;
 
- const [foundUser, setFoundUser] = useState();
- const [userComposition, setUserComposition] = useState(null);
-
- let F = users.find(function(user) {
+ let user = users.find(function(user) {
 	if(user._id === userID)
 		return true;
 });
 
-console.log(F)
+//  const [foundUser, setFoundUser] = useState();
+//  const [userComposition, setUserComposition] = useState(null);
 
   return (
     <div>
     
-    {/* <Composition /> */}
-    <Composition />
+    <CompositionRecall 
+    drawingX = {user.composition.drawingX}
+    drawingY = {user.composition.drawingY}
+    notes = {user.composition.notes}
+    />
      
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup({ userNotes, userDrawingX, userDrawingY }) {
@@ -23,7 +23,7 @@ export default function Signup({ userNotes, userDrawingX, userDrawingY }) {
       composition: {
         notes: userNotes,
         drawingX: userDrawingX,
-        drawingY: userDrawingY,
+        drawingY: userDrawingY
       },
     };
     axios
@@ -63,8 +63,7 @@ export default function Signup({ userNotes, userDrawingX, userDrawingY }) {
 
       {errorMessage && <h5>{errorMessage}</h5>}
 
-      <h3>Already have an account?</h3>
-      <Link to="/login">Login</Link>
+      
     </>
   );
 }

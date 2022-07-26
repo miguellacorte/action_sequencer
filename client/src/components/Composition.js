@@ -260,7 +260,7 @@ export default function Composition({
 
   return (
     <div>
-      <h1>WORKING</h1>
+      
       <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />
 
       <div>

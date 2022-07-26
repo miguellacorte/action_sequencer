@@ -3,6 +3,7 @@ import Composition from "../components/Composition";
 import { useParams, Link } from "react-router-dom";
 // import Popup from "reactjs-popup";
 import Signup from "../components/Signup";
+import LoginSave from "../components/LoginSave";
 
 export default function Playground() {
   let userID = useParams().id;
@@ -31,6 +32,10 @@ export default function Playground() {
         userDrawingY={userDrawingY}
       /> 
       }
+      <LoginSave 
+        userNotes={userNotes} userDrawingX={userDrawingX} 
+        userDrawingY={userDrawingY}
+      />
       </div> 
 
     </div>

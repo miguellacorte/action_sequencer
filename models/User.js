@@ -19,10 +19,9 @@ const userSchema = new Schema(
       type: String,
     },
     composition: {
-      notes: [String],
-      drawingX: [Number],
-      drawingY: [Number]
-    
+      notes : [String],
+      drawingX : [Number],
+      drawingY : [Number]
     }
   },
   {
