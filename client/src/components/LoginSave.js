@@ -1,67 +1,66 @@
-import React, { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { AuthContext } from '../context/auth'
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../context/auth";
 
 export default function LoginSave({ userNotes, userDrawingX, userDrawingY }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
 
-	const navigate = useNavigate()
+  const { storeToken, verifyStoredToken } = useContext(AuthContext);
 
-	const { storeToken, verifyStoredToken } = useContext(AuthContext)
+  console.log(userNotes, userDrawingX, userDrawingY);
 
-	const handleSubmit = e => {
-		e.preventDefault()
-		const requestBody = { 
-			email, 
-			password,
-			composition: {
-				notes: userNotes,
-				drawingX: userDrawingX,
-				drawingY: userDrawingY,
-			  }
-		 }
-		axios.post('/api/auth/login', requestBody)
-			.then(response => {
-				// redirect to projects
-				console.log('token set ser')
-				const token = response.data.authToken
-				// store the token
-				storeToken(token)
-				verifyStoredToken()
-					.then(() => {
-						
-						navigate('/participationHistory')
-					})
-			})
-			.catch(err => {
-				const errorDescription = err.response.data.message
-				setErrorMessage(errorDescription)
-			})
-	}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const requestBody = {
+      email,
+      password,
+	  compositions: [
+		{
+		  notes: userNotes,
+		  drawingX: userDrawingX,
+		  drawingY: userDrawingY
+		}
+	  ]
+    };
+    axios
+      .post("/api/auth/login", requestBody)
+      .then((response) => {
+        console.log("token set ser");
+        const token = response.data.authToken;
 
-	const handleEmail = e => setEmail(e.target.value)
-	const handlePassword = e => setPassword(e.target.value)
+        storeToken(token);
+        verifyStoredToken().then(() => {
+          navigate("/participationHistory");
+        });
+      })
+      .catch((err) => {
+        const errorDescription = err.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
 
-	return (
-		<>
-			<h1>Login</h1>
-			<form onSubmit={handleSubmit}>
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
 
-				<label htmlFor="email">Email: </label>
-				<input type="text" value={email} onChange={handleEmail} />
+  return (
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email: </label>
+        <input type="text" value={email} onChange={handleEmail} />
 
-				<label htmlFor="password">Password: </label>
-				<input type="password" value={password} onChange={handlePassword} />
+        <label htmlFor="password">Password: </label>
+        <input type="password" value={password} onChange={handlePassword} />
 
-				<button type="submit">Log In & Save composition</button>
-			</form>
+        <button type="submit">Log In & Save composition</button>
+      </form>
 
-			{errorMessage && <h5>{errorMessage}</h5>}
-
-		</>
-	)
-} 
+      {errorMessage && <h5>{errorMessage}</h5>}
+    </>
+  );
+}

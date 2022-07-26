@@ -9,7 +9,7 @@ export default function Signup({ userNotes, userDrawingX, userDrawingY }) {
   const [location, setLocation] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  console.log(userNotes, userDrawingX, userDrawingY);
+  
 
   const navigate = useNavigate();
 

@@ -1,14 +1,16 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/jwt");
 
 router.post("/signup", (req, res, next) => {
   const { email, password, username, location, compositions } = req.body;
 
   if (username === "" || password === "" || email === "") {
-    res.status(400).json({ message: "provide email, password and username ser" });
+    res
+      .status(400)
+      .json({ message: "provide email, password and username ser" });
     return;
   }
 
@@ -19,24 +21,33 @@ router.post("/signup", (req, res, next) => {
   }
 
   if (password.length < 7) {
-    res.status(400).json({ message: "password requires at least 7 charachters ser" });
+    res
+      .status(400)
+      .json({ message: "password requires at least 7 charachters ser" });
     return;
   }
 
-  User.findOne({ email })
-  .then((foundUser) => {
+  User.findOne({ email }).then((foundUser) => {
     if (foundUser) {
-      res.status(400).json({ message: "have u been here already? email already exists" });
+      res
+        .status(400)
+        .json({ message: "have u been here already? email already exists" });
       return;
     }
 
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(password, salt);
 
-    console.log(req.body)
-    return User.create({ email, password: hashedPassword, username, location, compositions })
+    console.log(req.body);
+    return User.create({
+      email,
+      password: hashedPassword,
+      username,
+      location,
+      compositions,
+    })
       .then((createdUser) => {
-        const { email, username, _id, location, compositions} = createdUser;
+        const { email, username, _id, location, compositions } = createdUser;
         const user = { email, username, _id, location, compositions };
         res.status(201).json({ user: user });
       })
@@ -48,56 +59,61 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  const { email, password } = req.body;
-  if (email === "" || password === ""  ) {
+  const { email, password, compositions } = req.body;
+  if (email === "" || password === "") {
     res.status(400).json({ message: "provide email and password" });
-    return
+    return;
   }
 
-  User.findOneAndUpdate( {email:"a34@aol.com"}, {email: "abdj@.com"})
+  console.log({ compositions });
 
   User.findOne({ email })
-  .then(foundUser => {  
-    if (!foundUser) {
+    .then((foundUser) => {
+      if (!foundUser) {
         res.status(400).json({ message: "user not found" });
-        return 
-  }; 
-  
- const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
- if (passwordCorrect){
-    const {_id, email, name} = foundUser
-    const payload = {_id, email, name}
-    const authToken = jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-       { algorithm: 'HS256', expiresIn: '12h'}
-    )
-    console.log(foundUser._id)
-   
+        return;
+      }
 
-      // findone and update
-      // {$push: {
-      //   compositions:
-      //    { notes: ["A5"],
-      //     drawingX: [136],
-      //     drawingY: [120]}
-      //   }})
+      User.findByIdAndUpdate(
+        foundUser._id,
+        {
+          $push: {
+            compositions,
+          },
+        },
+        function (err, result) {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(result);
+          }
+        }
+      );
 
-    res.status(200).json({authToken})
- } else {
-    res.status(401).json({message: 'unable to authenticate'})
- }
-})
-.catch(err => {
-    console.log(err);
-    res.status(500).json({ message: "internal server error" });
-  });
-})
+      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+      if (passwordCorrect) {
+        const { _id, email, name } = foundUser;
+        const payload = { _id, email, name };
+        const authToken = jwt.sign(payload, process.env.JWT_SECRET, {
+          algorithm: "HS256",
+          expiresIn: "12h",
+        });
+        console.log(foundUser._id);
 
-router.get ('/verify',isAuthenticated,(req,res,next) => {
+        res.status(200).json({ authToken });
+      } else {
+        res.status(401).json({ message: "unable to authenticate" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: "internal server error" });
+    });
+});
 
-    console.log('request payload is:', req.payload)
-    res.status(200).json(req.payload)
+router.get("/verify", isAuthenticated, (req, res, next) => {
+  console.log("request payload is:", req.payload);
+  res.status(200).json(req.payload);
 });
 
 module.exports = router;
