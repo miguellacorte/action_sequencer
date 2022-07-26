@@ -20,11 +20,13 @@ export default function Signup({ userNotes, userDrawingX, userDrawingY }) {
       password,
       username,
       location,
-      composition: {
-        notes: userNotes,
-        drawingX: userDrawingX,
-        drawingY: userDrawingY
-      },
+	  compositions: [
+		{
+		  notes: userNotes,
+		  drawingX: userDrawingX,
+		  drawingY: userDrawingY
+		}
+	  ]
     };
     axios
       .post("/api/auth/signup", requestBody)

@@ -3,9 +3,6 @@ import CompositionRecall from '../components/CompositionRecall'
 import { useParams } from 'react-router-dom';
 
 
-
-
-
 export default function ParticipationRecall({ users }) {
  let userID = useParams().id;
 
@@ -21,9 +18,9 @@ export default function ParticipationRecall({ users }) {
     <div>
     
     <CompositionRecall 
-    drawingX = {user.composition.drawingX}
-    drawingY = {user.composition.drawingY}
-    notes = {user.composition.notes}
+    drawingX = {user.compositions[0].drawingX}
+    drawingY = {user.compositions[0].drawingY}
+    notes = {user.compositions[0].notes}
     />
      
     </div>

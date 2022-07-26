@@ -3,9 +3,11 @@ import * as Tone from "tone";
 import Sketch from "react-p5";
 
 export default function CompositionRecall({ drawingX, drawingY, notes }) {
-  let drawingCoordinatesX = { drawingX }.drawingX;
-  let drawingCoordinatesY = { drawingY }.drawingY;
-  let compositionNotes = { notes }.notes;
+  let drawingCoordinatesX = drawingX;
+  let drawingCoordinatesY = drawingY;
+  let compositionNotes = notes;
+
+  console.log(compositionNotes)
 
   let totalDrawingDots = drawingCoordinatesY.length;
   let mouseCount = 0;

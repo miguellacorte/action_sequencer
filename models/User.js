@@ -18,11 +18,14 @@ const userSchema = new Schema(
     location: {
       type: String,
     },
-    composition: {
-      notes : [String],
-      drawingX : [Number],
-      drawingY : [Number]
-    }
+
+    compositions: [
+      {
+        notes: [String],
+        drawingX: [Number],
+        drawingY: [Number]
+      }
+    ]
   },
   {
     timestamps: true,

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const { isAuthenticated } = require("../middleware/jwt");
 
 router.post("/signup", (req, res, next) => {
-  const { email, password, username, location, composition } = req.body;
+  const { email, password, username, location, compositions } = req.body;
 
   if (username === "" || password === "" || email === "") {
     res.status(400).json({ message: "provide email, password and username ser" });
@@ -34,10 +34,10 @@ router.post("/signup", (req, res, next) => {
     const hashedPassword = bcrypt.hashSync(password, salt);
 
     console.log(req.body)
-    return User.create({ email, password: hashedPassword, username, location, composition })
+    return User.create({ email, password: hashedPassword, username, location, compositions })
       .then((createdUser) => {
-        const { email, username, _id, location, composition} = createdUser;
-        const user = { email, username, _id, location, composition };
+        const { email, username, _id, location, compositions} = createdUser;
+        const user = { email, username, _id, location, compositions };
         res.status(201).json({ user: user });
       })
       .catch((err) => {
@@ -54,13 +54,15 @@ router.post("/login", (req, res, next) => {
     return
   }
 
+  User.findOneAndUpdate( {email:"a34@aol.com"}, {email: "abdj@.com"})
+
   User.findOne({ email })
   .then(foundUser => {  
-    console.log(foundUser)
     if (!foundUser) {
         res.status(400).json({ message: "user not found" });
         return 
-  };
+  }; 
+  
  const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
  if (passwordCorrect){
     const {_id, email, name} = foundUser
@@ -70,6 +72,17 @@ router.post("/login", (req, res, next) => {
         process.env.JWT_SECRET,
        { algorithm: 'HS256', expiresIn: '12h'}
     )
+    console.log(foundUser._id)
+   
+
+      // findone and update
+      // {$push: {
+      //   compositions:
+      //    { notes: ["A5"],
+      //     drawingX: [136],
+      //     drawingY: [120]}
+      //   }})
+
     res.status(200).json({authToken})
  } else {
     res.status(401).json({message: 'unable to authenticate'})
