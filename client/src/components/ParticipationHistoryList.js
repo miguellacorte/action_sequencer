@@ -12,7 +12,6 @@ export default function ParticipationHistoryList({ users }) {
               <h2>{user.username}</h2>
               <h3>{user.location}</h3>
               <h4>{user.createdAt}</h4>
-              {/* SLICE CREATED TIME BABY!! */}
             </Link>
           </div>
         );

@@ -5,9 +5,8 @@ const jwt = require('jsonwebtoken');
 const { isAuthenticated } = require("../middleware/jwt");
 
 router.post("/signup", (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, location, composition } = req.body;
 
-  //   res.json({ email, password, username })
   if (username === "" || password === "" || email === "") {
     res.status(400).json({ message: "provide email, password and username ser" });
     return;
@@ -34,10 +33,11 @@ router.post("/signup", (req, res, next) => {
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(password, salt);
 
-    return User.create({ email, password: hashedPassword, username })
+    console.log(req.body)
+    return User.create({ email, password: hashedPassword, username, location, composition })
       .then((createdUser) => {
-        const { email, username, _id } = createdUser;
-        const user = { email, username, _id };
+        const { email, username, _id, location, composition} = createdUser;
+        const user = { email, username, _id, location, composition };
         res.status(201).json({ user: user });
       })
       .catch((err) => {

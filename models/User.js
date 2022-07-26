@@ -1,5 +1,4 @@
 const { Schema, model, default: mongoose } = require("mongoose");
-// const Sequence = require("../models/Sequence");
 
 const userSchema = new Schema(
   {
@@ -19,17 +18,14 @@ const userSchema = new Schema(
     location: {
       type: String,
     },
-  },
-  {
     composition: {
       notes: [String],
       drawingX: [Number],
-      drawingY: [Number],
-      timestamps: true,
-    },
+      drawingY: [Number]
+    
+    }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );

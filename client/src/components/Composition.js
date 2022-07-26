@@ -9,8 +9,8 @@ export default function Composition({
   setUserDrawingX,
   userDrawingY,
   setUserDrawingY,
-  setShowModal,
-  showModal,
+  setSaveComposition,
+  saveComposition,
 }) {
   let setup = (p5, canvasParentRef) => {
     let canvas = p5
@@ -32,7 +32,7 @@ export default function Composition({
   let chorus = new Tone.Chorus(20, chorusDelayTime, 1).toDestination();
   chorus.wet.value = 1;
 
-  let feedback = 1;
+  let feedback = 0.3;
   let pingPong = new Tone.PingPongDelay("16n", feedback).toDestination();
 
   synth.connect(chorus);
@@ -254,25 +254,26 @@ export default function Composition({
     setUserDrawingY((userDrawingY = drawingCoordinatesY));
   };
 
-  const handleModal = (event) => {
-    setShowModal(showModal = true);
+  const handleSaveComposition = (event) => {
+    setSaveComposition(saveComposition = true);
   };
 
   return (
     <div>
       <h1>WORKING</h1>
       <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />
+
+      <div>
       <button
         onClick={() => {
           handleNotes();
           handleDrawingY();
           handleDrawingX();
-          handleModal();
+          handleSaveComposition();
         }}
-      >
-        {" "}
-        Save Composition{" "}
+      > Save Composition
       </button>
+      </div>
     </div>
   );
 }
