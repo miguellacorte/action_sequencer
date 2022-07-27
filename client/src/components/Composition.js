@@ -258,10 +258,10 @@ export default function Composition({
     setUserDrawingY((userDrawingY = drawingCoordinatesY));
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleSaveComposition, true);
-    console.log("keydown")
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleSaveComposition, true);
+  //   console.log("keydown")
+  // }, []);
 
   const handleSaveComposition = (event) => {
     

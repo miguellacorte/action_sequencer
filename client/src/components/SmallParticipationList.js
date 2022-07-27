@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import "../styles/ParticipationList.css";
 
 export default function SmallParticipationList({ users }) {
-  let usersWithCompositions = [];
+//   let usersWithCompositions = [];
 
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].compositions[0].notes.length !== 0) {
-      usersWithCompositions.push(users[i]);
-    }
-  }
+//   for (let i = 0; i < users.length; i++) {
+//     if (users[i].compositions[0].notes.length !== 0) {
+//       usersWithCompositions.push(users[i]);
+//     }
+//   }
 
-  let lastThreeUsers = usersWithCompositions?.slice(
-    usersWithCompositions.length - 3,
-    usersWithCompositions.length
-  );
-  console.log(lastThreeUsers);
+  console.log(users)
+//   let lastThreeUsers = usersWithCompositions?.slice(
+//     usersWithCompositions.length - 3,
+//     usersWithCompositions.length
+//   );
+//   console.log(lastThreeUsers);
 
   //   for (let i = 0; i < lastThreeUsers.length; i++){
   //    lastThreeUsers[i].createdAt.slice(0,5)
@@ -25,7 +26,7 @@ export default function SmallParticipationList({ users }) {
 
   return (
     <div>
-      {lastThreeUsers?.map((user) => {
+      {users?.map((user) => {
         return (
           <div key={user._id} className="list">
             <Link to={`/participationHistory/${user._id}`}>
