@@ -27,9 +27,6 @@ function App() {
   }, []);
 
 
-
-  console.log(users)
-
   return (
     <div className="App">
     <Navbar />

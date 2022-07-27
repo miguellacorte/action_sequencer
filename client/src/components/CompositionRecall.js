@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import * as Tone from "tone";
 import Sketch from "react-p5";
 
@@ -10,15 +10,17 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
     };
   });
 
-  let drawingCoordinatesX = drawingX;
-  let drawingCoordinatesY = drawingY;
-  let compositionNotes = notes;
+  let drawingCoordinatesX = drawingX ;
+  let drawingCoordinatesY = drawingY ;
+  notes = notes ;
 
-  console.log(compositionNotes);
+  console.log(notes, drawingCoordinatesY, drawingCoordinatesX)
+
+  //   console.log(compositionNotes);
 
   let totalDrawingDots = drawingCoordinatesY.length;
-  let mouseCount = 0;
-  let note = "";
+  //   let mouseCount = 0;
+  //   let note = "";
 
   let setup = (p5, canvasParentRef) => {
     let canvas = p5
@@ -40,8 +42,6 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
     oscillator: { type: "square8" },
   }).toDestination();
 
-  const gainNode = new Tone.Gain(0).toDestination();
-  gainNode.gain.rampTo(1, 0.1);
   Tone.Destination.volume.value = -15;
 
   let revWet = 1;
@@ -59,9 +59,9 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
   chorus.connect(pingPong);
   pingPong.connect(reverb);
 
-  function audioStart() {
-    Tone.start();
-  }
+    function audioStart() {
+      Tone.start();
+    }
 
   const seq = new Tone.Sequence(
     (time, note) => {
@@ -75,7 +75,7 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
 
   return (
     <div>
-      <Sketch setup={setup} />
+      <Sketch setup={setup}  />
     </div>
   );
 }

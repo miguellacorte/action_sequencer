@@ -1,29 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/smallParticipationList.css";
+import "../styles/ParticipationList.css";
 
 export default function SmallParticipationList({ users }) {
+  let usersWithCompositions = [];
 
-  let lastThreeUsers = users?.slice(users.length - 3, users.length);
-  console.log(lastThreeUsers)
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].compositions[0].notes.length !== 0) {
+      usersWithCompositions.push(users[i]);
+    }
+  }
 
-//   for (let i = 0; i < lastThreeUsers.length; i++){
-//    lastThreeUsers[i].createdAt.slice(0,5)
-//   }
+  let lastThreeUsers = usersWithCompositions?.slice(
+    usersWithCompositions.length - 3,
+    usersWithCompositions.length
+  );
+  console.log(lastThreeUsers);
 
-//   console.log(lastThreeUsers[1].createdAt.slice(0,10))
+  //   for (let i = 0; i < lastThreeUsers.length; i++){
+  //    lastThreeUsers[i].createdAt.slice(0,5)
+  //   }
+
+  //   console.log(lastThreeUsers[1].createdAt.slice(0,10))
 
   return (
-    
     <div>
       {lastThreeUsers?.map((user) => {
         return (
           <div key={user._id} className="list">
-                <Link to={`/participationHistory/${user._id}`}>
-                <h3>{user.username}</h3>
-                </Link>
-                <p>{user.location}</p>
-                <p>{user.createdAt}</p>
+            <Link to={`/participationHistory/${user._id}`}>
+              <h3>{user.username}</h3>
+            </Link>
+            <p>{user.location}</p>
+            <p>{user.createdAt}</p>
           </div>
         );
       })}

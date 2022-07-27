@@ -11,6 +11,9 @@ export default function ParticipationRecall({ users }) {
 		return true;
 });
 
+
+console.log(user.compositions[0].drawingX)
+
 //  const [foundUser, setFoundUser] = useState();
 //  const [userComposition, setUserComposition] = useState(null);
 

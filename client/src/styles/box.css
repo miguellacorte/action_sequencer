@@ -13,12 +13,6 @@
   user-select: none;
 }
 
-.boxComposition {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-}
-
 .saveCompositionBtn {
   position: relative;
   top: 6.5rem;
