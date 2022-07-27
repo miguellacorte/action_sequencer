@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Tone from "tone";
 import Sketch from "react-p5";
 
@@ -12,6 +12,12 @@ export default function Composition({
   setSaveComposition,
   saveComposition,
 }) {
+  useEffect(() => {
+    return () => {
+      Tone.Transport.stop();
+    };
+  });
+
   let setup = (p5, canvasParentRef) => {
     let canvas = p5
       .createCanvas(p5.windowWidth, p5.windowHeight)
@@ -55,9 +61,7 @@ export default function Composition({
     let width = p5.windowWidth;
     let height = p5.windowHeight;
 
-    console.log(drawingCoordinatesX);
-    console.log(drawingCoordinatesY);
-
+  
     audioStart();
 
     function checkNote() {
@@ -254,15 +258,21 @@ export default function Composition({
     setUserDrawingY((userDrawingY = drawingCoordinatesY));
   };
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleSaveComposition, true);
+    console.log("keydown")
+  }, []);
+
   const handleSaveComposition = (event) => {
-    setSaveComposition(saveComposition = true);
+    
+      setSaveComposition((saveComposition = true));
+    
   };
 
+  console.log(userNotes, userDrawingX, userDrawingY)
   return (
     <div>
-      
       <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />
-
       <div>
       <button
         onClick={() => {
@@ -273,6 +283,8 @@ export default function Composition({
         }}
       > Save Composition
       </button>
+
+
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "./styles/App.css";
 import { Routes, Route } from "react-router-dom"; // <== IMPORT
 import Home from "./pages/Home"
 import ParticipationHistory from "./pages/ParticipationHistory";
@@ -8,6 +8,9 @@ import Playground from "./pages/Playground"
 import axios from "axios";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import Navbar from "./components/Navbar";
+
+
 
  
 function App() {
@@ -29,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+    <Navbar />
       <Routes>
         <Route path="/" element={<Home users={users} />} />
         <Route path="/participationHistory" element={<ParticipationHistory users={users} />} />

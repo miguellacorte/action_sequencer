@@ -84,9 +84,7 @@ router.post("/login", (req, res, next) => {
         function (err, result) {
           if (err) {
             res.send(err);
-          } else {
-            res.send(result);
-          }
+          } 
         }
       );
 

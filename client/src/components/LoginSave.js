@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
+import FormInput from "../styles/FormInput.css"
 
 export default function LoginSave({ userNotes, userDrawingX, userDrawingY }) {
   const [email, setEmail] = useState("");
@@ -50,12 +51,12 @@ export default function LoginSave({ userNotes, userDrawingX, userDrawingY }) {
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <label htmlFor="email">Email: </label>
-        <input type="text" value={email} onChange={handleEmail} />
+        <input type="text" value={email} onChange={handleEmail} className="textInput"/>
 
         <label htmlFor="password">Password: </label>
-        <input type="password" value={password} onChange={handlePassword} />
+        <input type="password" value={password} onChange={handlePassword} className="textInput" />
 
         <button type="submit">Log In & Save composition</button>
       </form>

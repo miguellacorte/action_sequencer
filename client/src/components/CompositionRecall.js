@@ -1,13 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import * as Tone from "tone";
 import Sketch from "react-p5";
 
 export default function CompositionRecall({ drawingX, drawingY, notes }) {
+
+  useEffect(() => {
+    return () => {
+      Tone.Transport.stop();
+    };
+  });
+
   let drawingCoordinatesX = drawingX;
   let drawingCoordinatesY = drawingY;
   let compositionNotes = notes;
 
-  console.log(compositionNotes)
+  console.log(compositionNotes);
 
   let totalDrawingDots = drawingCoordinatesY.length;
   let mouseCount = 0;
@@ -33,6 +40,8 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
     oscillator: { type: "square8" },
   }).toDestination();
 
+  const gainNode = new Tone.Gain(0).toDestination();
+  gainNode.gain.rampTo(1, 0.1);
   Tone.Destination.volume.value = -15;
 
   let revWet = 1;
