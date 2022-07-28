@@ -1,0 +1,18 @@
+.playBtn {
+  appearance: none;
+  position: absolute;
+  top: 35rem;
+  left: 0rem;
+}
+
+.saveCompositionBtn {
+  position: absolute;
+  top: 31.5rem;
+  left: 0rem;
+}
+
+.saveCompositionBtnHome {
+  position: absolute;
+  top: 35rem;
+  left: 2rem;
+}

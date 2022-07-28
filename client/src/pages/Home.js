@@ -2,11 +2,11 @@ import React from "react";
 import SmallParticipationList from "../components/SmallParticipationList";
 import { Link } from "react-router-dom";
 import Draggable from "react-draggable";
-import "../styles/box.css";
+import "../styles/Btns.css";
 import CompositionRecall from "../components/CompositionRecall";
 
 export default function Home({ usersWithCompositions }) {
-  console.log(usersWithCompositions)
+  console.log(usersWithCompositions);
   if (usersWithCompositions.length !== 0) {
     let totalUsers = usersWithCompositions.length;
     let lastUser = usersWithCompositions[totalUsers - 1];
@@ -81,14 +81,11 @@ export default function Home({ usersWithCompositions }) {
                 drawingY={user.drawingY}
                 notes={user.notes}
               />
-            </div>
-            
-          </Draggable>
-          <div>
               <Link to="/playground" className="saveCompositionBtnHome">
                 <button>create your own participation</button>
               </Link>
-          </div>
+            </div>
+          </Draggable>
         </div>
       </div>
     );

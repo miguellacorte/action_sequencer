@@ -13,13 +13,13 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
   let drawingCoordinatesY = drawingY;
   notes = notes;
   let width = 900;
-  let height = 500;
+  let height = 530;
 
   let totalDrawingDots = drawingCoordinatesY.length;
 
   let setup = (p5, canvasParentRef) => {
     let canvas = p5.createCanvas(width, height).parent(canvasParentRef);
-    Tone.start();
+    
 
     for (let i = 0; i < totalDrawingDots; i++) {
       p5.circle(drawingCoordinatesX[i], drawingCoordinatesY[i], 29);
@@ -35,6 +35,11 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
   let synth = new Tone.Synth({
     oscillator: { type: "square8" },
   }).toDestination();
+
+  const play = () => {
+    console.log('play')
+    Tone.start();
+  };
 
   Tone.Destination.volume.value = -15;
 
@@ -66,6 +71,13 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
   return (
     <div>
       <Sketch setup={setup} />
+      <button 
+      onClick={play} 
+      className="playBtn"
+
+      >▶</button>
     </div>
   );
+    
+    
 }
