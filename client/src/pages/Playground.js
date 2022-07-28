@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Composition from "../components/Composition";
+import CompositionWindow from "../components/CompositionWindow";
 import { useParams, Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import LoginSave from "../components/LoginSave";
 import Draggable from "react-draggable";
-import "../styles/box.css"
+import "../styles/box.css";
 import SignupAndSave from "../components/SignupAndSave";
 
 export default function Playground() {
@@ -16,14 +16,12 @@ export default function Playground() {
   const [saveComposition, setSaveComposition] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  console.log(position)
+  console.log(position);
 
   return (
     <div>
-     
-
-      <div >
-        {saveComposition  && (
+      <div>
+        {saveComposition && (
           <SignupAndSave
             userNotes={userNotes}
             userDrawingX={userDrawingX}
@@ -40,22 +38,42 @@ export default function Playground() {
         )}
       </div>
 
-      <div >
-      {!saveComposition  && (
-     
-          <Composition 
-          setUserNotes={setUserNotes}
-          userNotes={userNotes}
-          userDrawingX={userDrawingX}
-          setUserDrawingX={setUserDrawingX}
-          userDrawingY={userDrawingY}
-          setUserDrawingY={setUserDrawingY}
-          saveComposition={saveComposition}
-          setSaveComposition={setSaveComposition}
+      <div>
+        {!saveComposition && (
+          <Draggable handle="#handle">
+            <div className="compositionBox">
+              <fieldset
+                id="handle"
+                style={{
+                  fontSize: "13px",
+                  position: "relative",
+                  left: "-2px",
+                  color: "white",
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  borderBlockHeight: "200px",
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  padding: "3px",
+                  width: "893px",
+                }}
+              >
+                Playground
+              </fieldset>
 
-        /> 
-
-      )}
+              <CompositionWindow
+                setUserNotes={setUserNotes}
+                userNotes={userNotes}
+                userDrawingX={userDrawingX}
+                setUserDrawingX={setUserDrawingX}
+                userDrawingY={userDrawingY}
+                setUserDrawingY={setUserDrawingY}
+                saveComposition={saveComposition}
+                setSaveComposition={setSaveComposition}
+              />
+            </div>
+          </Draggable>
+        )}
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ export default function Signup() {
       email,
       password,
       username,
-      location
-    }
+      location,
+    };
     axios
       .post("/api/auth/signup", requestBody)
       .then((response) => {
@@ -29,7 +29,7 @@ export default function Signup() {
         setErrorMessage(errorDescription);
       });
   };
-//   
+  //
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handleUsername = (e) => setUsername(e.target.value);
@@ -58,4 +58,5 @@ export default function Signup() {
       {errorMessage && <h5>{errorMessage}</h5>}
     </>
   );
+  
 }

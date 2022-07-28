@@ -3,25 +3,18 @@ import SmallParticipationList from "../components/SmallParticipationList";
 import { Link } from "react-router-dom";
 import Draggable from "react-draggable";
 import "../styles/box.css";
-// import CompositionRecall from "";
+import CompositionRecall from "../components/CompositionRecall";
 
-export default function Home({ users }) {
-  
-  let Users = {users}.users
-  // let UsersLength = Users.length
-  // let totalUsers =  UsersLength - 1
-  // let lastUser = Users[totalUsers]
-  // let lastUserCompositions = lastUser.compositions
-  // let lastUserCompositionsAmount = lastUserCompositions.length
-  // let lastUserCompositionsTotal = lastUserCompositionsAmount-1
-  // let finalComposition = lastUserCompositions[lastUserCompositionsTotal]
-  // let finalCompositionNotes = finalComposition.notes
-  // let finalCompositionDrawingX = finalComposition.drawingX
-  // let finalCompositionDrawingY = finalComposition.drawingY
-  console.log(Users)
+export default function Home({ usersWithCompositions }) {
+  console.log(usersWithCompositions)
+  if (usersWithCompositions.length !== 0) {
+    let totalUsers = usersWithCompositions.length;
+    let lastUser = usersWithCompositions[totalUsers - 1];
+    let lastUserCompositions = lastUser.compositions;
+    let LastUserCompositionNumber = lastUserCompositions.length;
+    let user = lastUserCompositions[LastUserCompositionNumber - 1];
 
-  return (
-   
+    return (
       <div>
         <Draggable handle="#handle">
           <div className="boxParticipationList">
@@ -43,7 +36,9 @@ export default function Home({ users }) {
             >
               Participation history List
             </fieldset>
-            <SmallParticipationList users={users} />
+            <SmallParticipationList
+              usersWithCompositions={usersWithCompositions}
+            />
             <Link
               to="/participationHistory"
               style={{
@@ -59,18 +54,43 @@ export default function Home({ users }) {
           </div>
         </Draggable>
 
-        <Link to="/playground">
-          <button>create your own participation</button>
-        </Link>
+        <div>
+          <Draggable handle="#handle">
+            <div className="compositionRecallHome">
+              <fieldset
+                id="handle"
+                style={{
+                  fontSize: "13px",
+                  position: "relative",
+                  left: "-2px",
+                  color: "white",
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  borderBlockHeight: "200px",
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  padding: "3px",
+                  width: "943px",
+                }}
+              >
+                Last user participation
+              </fieldset>
 
-        {/* <CompositionRecall 
-        notes={finalCompositionNotes}
-        drawingX={finalCompositionDrawingX}
-        drawingY={finalCompositionDrawingY}
-        /> */}
-
-
+              <CompositionRecall
+                drawingX={user.drawingX}
+                drawingY={user.drawingY}
+                notes={user.notes}
+              />
+            </div>
+            
+          </Draggable>
+          <div>
+              <Link to="/playground" className="saveCompositionBtnHome">
+                <button>create your own participation</button>
+              </Link>
+          </div>
+        </div>
       </div>
-      
-  );
+    );
+  }
 }

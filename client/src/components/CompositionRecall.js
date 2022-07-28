@@ -3,29 +3,23 @@ import * as Tone from "tone";
 import Sketch from "react-p5";
 
 export default function CompositionRecall({ drawingX, drawingY, notes }) {
-
   useEffect(() => {
     return () => {
       Tone.Transport.stop();
     };
   });
 
-  let drawingCoordinatesX = drawingX ;
-  let drawingCoordinatesY = drawingY ;
-  notes = notes ;
-
-  console.log(notes, drawingCoordinatesY, drawingCoordinatesX)
-
-  //   console.log(compositionNotes);
+  let drawingCoordinatesX = drawingX;
+  let drawingCoordinatesY = drawingY;
+  notes = notes;
+  let width = 900;
+  let height = 500;
 
   let totalDrawingDots = drawingCoordinatesY.length;
-  //   let mouseCount = 0;
-  //   let note = "";
 
   let setup = (p5, canvasParentRef) => {
-    let canvas = p5
-      .createCanvas(p5.windowWidth, p5.windowHeight)
-      .parent(canvasParentRef);
+    let canvas = p5.createCanvas(width, height).parent(canvasParentRef);
+    Tone.start();
 
     for (let i = 0; i < totalDrawingDots; i++) {
       p5.circle(drawingCoordinatesX[i], drawingCoordinatesY[i], 29);
@@ -59,10 +53,6 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
   chorus.connect(pingPong);
   pingPong.connect(reverb);
 
-    function audioStart() {
-      Tone.start();
-    }
-
   const seq = new Tone.Sequence(
     (time, note) => {
       synth.triggerAttackRelease(note, 0.1, time);
@@ -75,7 +65,7 @@ export default function CompositionRecall({ drawingX, drawingY, notes }) {
 
   return (
     <div>
-      <Sketch setup={setup}  />
+      <Sketch setup={setup} />
     </div>
   );
 }

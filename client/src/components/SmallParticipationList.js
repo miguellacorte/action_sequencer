@@ -2,19 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/ParticipationList.css";
 
-export default function SmallParticipationList({ users }) {
+export default function SmallParticipationList({ usersWithCompositions }) {
 
-  if (users !== undefined) {
-    let usersWithCompositions = [];
-
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].compositions[0].notes.length !== 0) {
-        usersWithCompositions.push(users[i]);
-      }
-    }
-
-    console.log(usersWithCompositions);
-
+  if (usersWithCompositions !== undefined) {
+   
     let lastThreeUsers = usersWithCompositions?.slice(
       usersWithCompositions.length - 2,
       usersWithCompositions.length

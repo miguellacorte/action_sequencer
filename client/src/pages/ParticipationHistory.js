@@ -2,9 +2,10 @@ import React from "react";
 import ParticipationHistoryList from "../components/ParticipationHistoryList";
 import Draggable from "react-draggable";
 
-export default function ParticipationHistory({ users }) {
+export default function ParticipationHistory({ usersWithCompositions }) {
 
-  if (users !== undefined) {
+  if (usersWithCompositions !== undefined) {
+
   return (
     <div>
       <h1>Participation History</h1>
@@ -28,7 +29,7 @@ export default function ParticipationHistory({ users }) {
           >
             Participation history List
           </fieldset>
-          <ParticipationHistoryList users={users}  />
+          <ParticipationHistoryList usersWithCompositions={usersWithCompositions}  />
         </div>
       </Draggable>
     </div>
