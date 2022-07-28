@@ -29,6 +29,7 @@ export default function Signup() {
         setErrorMessage(errorDescription);
       });
   };
+//   
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handleUsername = (e) => setUsername(e.target.value);
