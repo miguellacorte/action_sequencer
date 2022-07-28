@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Composition from "../components/Composition";
 import { useParams, Link } from "react-router-dom";
 import Popup from "reactjs-popup";
-import Signup from "../components/Signup";
 import LoginSave from "../components/LoginSave";
 import Draggable from "react-draggable";
 import "../styles/box.css"
+import SignupAndSave from "../components/SignupAndSave";
 
 export default function Playground() {
   let userID = useParams().id;
@@ -24,7 +24,7 @@ export default function Playground() {
 
       <div >
         {saveComposition  && (
-          <Signup
+          <SignupAndSave
             userNotes={userNotes}
             userDrawingX={userDrawingX}
             userDrawingY={userDrawingY}
@@ -52,7 +52,7 @@ export default function Playground() {
           setUserDrawingY={setUserDrawingY}
           saveComposition={saveComposition}
           setSaveComposition={setSaveComposition}
-          
+
         /> 
 
       )}

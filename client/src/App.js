@@ -11,10 +11,8 @@ import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
 
 
-
- 
 function App() {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,6 +23,8 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log(users)
 
 
   return (

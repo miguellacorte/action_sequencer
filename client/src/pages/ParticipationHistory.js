@@ -1,13 +1,14 @@
-import React from 'react'
-import ParticipationHistoryList from '../components/ParticipationHistoryList'
+import React from "react";
+import ParticipationHistoryList from "../components/ParticipationHistoryList";
 import Draggable from "react-draggable";
 
 export default function ParticipationHistory({ users }) {
 
+  if (users !== undefined) {
   return (
     <div>
-    <h1>Participation History</h1>
-    <Draggable handle="#handle">
+      <h1>Participation History</h1>
+      <Draggable handle="#handle">
         <div className="boxParticipationList">
           <fieldset
             id="handle"
@@ -27,14 +28,10 @@ export default function ParticipationHistory({ users }) {
           >
             Participation history List
           </fieldset>
-          <ParticipationHistoryList users = {users}
-          className="list"
-           />
-         
+          <ParticipationHistoryList users={users}  />
         </div>
       </Draggable>
-    
     </div>
-
-  )
+  );
+}
 }

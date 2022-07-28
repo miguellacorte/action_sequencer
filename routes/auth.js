@@ -4,6 +4,60 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/jwt");
 
+router.post("/signupandsave", (req, res, next) => {
+  const { email, password, username, location, compositions } = req.body;
+
+  if (username === "" || password === "" || email === "") {
+    res
+      .status(400)
+      .json({ message: "provide email, password and username ser" });
+    return;
+  }
+
+  const emailValid = email.includes("@");
+  if (!emailValid) {
+    res.status(400).json({ message: "provide a valid email" });
+    return;
+  }
+
+  if (password.length < 7) {
+    res
+      .status(400)
+      .json({ message: "password requires at least 7 charachters ser" });
+    return;
+  }
+
+  User.findOne({ email }).then((foundUser) => {
+    if (foundUser) {
+      res
+        .status(400)
+        .json({ message: "have u been here already? email already exists" });
+      return;
+    }
+
+    const salt = bcrypt.genSaltSync();
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+    console.log(req.body);
+    return User.create({
+      email,
+      password: hashedPassword,
+      username,
+      location,
+      compositions,
+    })
+      .then((createdUser) => {
+        const { email, username, _id, location, compositions } = createdUser;
+        const user = { email, username, _id, location, compositions };
+        res.status(201).json({ user: user });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "internal server error" });
+      });
+  });
+});
+
 router.post("/signup", (req, res, next) => {
   const { email, password, username, location, compositions } = req.body;
 

@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Signup() {
+export default function SignupAndSave({ userNotes, userDrawingX, userDrawingY }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+
+  console.log(userNotes, userDrawingX, userDrawingY)
 
   const navigate = useNavigate();
 
@@ -17,12 +19,19 @@ export default function Signup() {
       email,
       password,
       username,
-      location
-    }
+      location,
+	  compositions: [
+		{
+		  notes: userNotes,
+		  drawingX: userDrawingX,
+		  drawingY: userDrawingY
+		}
+	  ]
+    };
     axios
-      .post("/api/auth/signup", requestBody)
+      .post("/api/auth/signupandsave", requestBody)
       .then((response) => {
-        navigate("/");
+        navigate("/participationHistory");
       })
       .catch((err) => {
         const errorDescription = err.response.data.message;
@@ -51,10 +60,12 @@ export default function Signup() {
         <label htmlFor="location">location: </label>
         <input type="text" value={location} onChange={handleLocation} />
 
-        <button type="submit">Sign Up </button>
+        <button type="submit">Sign Up & Save Composition</button>
       </form>
 
       {errorMessage && <h5>{errorMessage}</h5>}
+
+      
     </>
   );
 }
