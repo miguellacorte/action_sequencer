@@ -7,7 +7,7 @@ export default function SmallParticipationList({ usersWithCompositions }) {
   if (usersWithCompositions !== undefined) {
    
     let lastThreeUsers = usersWithCompositions?.slice(
-      usersWithCompositions.length - 2,
+      usersWithCompositions.length - 3,
       usersWithCompositions.length
     );
     console.log(lastThreeUsers);

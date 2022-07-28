@@ -53,10 +53,10 @@ export default function LoginSave({ userNotes, userDrawingX, userDrawingY }) {
       <h1>Login</h1>
       <form onSubmit={handleSubmit} >
         <label htmlFor="email">Email: </label>
-        <input type="text" value={email} onChange={handleEmail} className="textInput"/>
+        <input type="text" value={email} onChange={handleEmail} />
 
         <label htmlFor="password">Password: </label>
-        <input type="password" value={password} onChange={handlePassword} className="textInput" />
+        <input type="password" value={password} onChange={handlePassword}  />
 
         <button type="submit">Log In & Save composition</button>
       </form>
