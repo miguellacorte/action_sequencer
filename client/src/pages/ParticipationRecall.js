@@ -10,10 +10,8 @@ export default function ParticipationRecall({ users }) {
     if (user._id === userID) return true;
   });
 
-  console.log(user.compositions);
-
-  //  const [foundUser, setFoundUser] = useState();
-  //  const [userComposition, setUserComposition] = useState(null);
+  console.log(user.compositions.length);
+  let lastComposition = user.compositions.length -1
 
   return (
     <div>
@@ -35,13 +33,13 @@ export default function ParticipationRecall({ users }) {
               width: "943px",
             }}
           >
-            Playground
+            Participation from: {user.username}
           </fieldset>
 
           <CompositionRecall
-            drawingX={user.compositions[0].drawingX}
-            drawingY={user.compositions[0].drawingY}
-            notes={user.compositions[0].notes}
+            drawingX={user.compositions[lastComposition].drawingX}
+            drawingY={user.compositions[lastComposition].drawingY}
+            notes={user.compositions[lastComposition].notes}
           />
         </div>
       </Draggable>
