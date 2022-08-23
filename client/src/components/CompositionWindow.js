@@ -19,17 +19,23 @@ export default function Composition({
     };
   });
 
-  let width = 900;
-  let height = 500;
+  let width = window.innerWidth * 0.9;
+  let height = window.innerHeight * 0.8;
 
   let setup = (p5, canvasParentRef) => {
-    console.log(canvasParentRef);
+    console.log(width);
+    
+    console.log(p5.deviceOrientation);
     let canvas = p5.createCanvas(width, height).parent(canvasParentRef);
 
     canvas.mousePressed((event) => {
       console.log("Clicked on the canvas. Event:", event);
     });
   };
+
+  // let windowResized = (p5) => {
+  //   p5.resizeCanvas(p5.windowWidth, p5.windowHeight/1.1);
+  // };
 
   let synth = new Tone.Synth({
     oscillator: { type: "square8" },

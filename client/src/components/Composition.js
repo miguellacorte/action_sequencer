@@ -61,7 +61,6 @@ export default function Composition({
     let width = p5.windowWidth;
     let height = p5.windowHeight;
 
-  
     audioStart();
 
     function checkNote() {

@@ -15,15 +15,15 @@
 
 .compositionBox {
   position: absolute;
-  top: 6rem;
-  left: 3rem;
+  top: 2rem;
+  left: 2rem;
   right: 0;
   bottom: 0;
   background-color: white;
   cursor: move;
   color: black;
-  width: 900px;
-  height: 500px;
+  /* width: 900px;
+  height: 500px; */
   user-select: none;
   border: 1px solid rgb(153, 153, 153);
 }

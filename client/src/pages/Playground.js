@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import CompositionWindow from "../components/CompositionWindow";
 import { useParams, Link } from "react-router-dom";
-import Popup from "reactjs-popup";
 import LoginSave from "../components/LoginSave";
 import Draggable from "react-draggable";
 import "../styles/box.css";
 import SignupAndSave from "../components/SignupAndSave";
+
 
 export default function Playground() {
   let userID = useParams().id;
@@ -16,7 +16,7 @@ export default function Playground() {
   const [saveComposition, setSaveComposition] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  console.log(position);
+  console.log(window.innerWidth);
 
   return (
     <div>
@@ -41,7 +41,12 @@ export default function Playground() {
       <div>
         {!saveComposition && (
           <Draggable handle="#handle">
-            <div className="compositionBox">
+            <div className="compositionBox"
+            style={{
+              width: "90%",
+              height: "86%"
+            }}
+            >
               <fieldset
                 id="handle"
                 style={{
@@ -55,7 +60,7 @@ export default function Playground() {
                   borderStyle: "solid",
                   borderWidth: "1px",
                   padding: "3px",
-                  width: "893px",
+                  width: "99%",
                 }}
               >
                 Playground
