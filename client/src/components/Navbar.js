@@ -16,8 +16,6 @@ export default function NavBar() {
         <li><a href="/">Home</a></li>
           <li><a href="/participationHistory">Participation History</a></li>
           <li><a href="/playground">Playground</a></li>
-          <li><a href="/signup">Sign Up</a></li>
-          <li><a href="/login">Login</a></li>
         </ul>
       </nav>
     </div>

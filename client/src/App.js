@@ -6,8 +6,6 @@ import ParticipationHistory from "./pages/ParticipationHistory";
 import ParticipationRecall from "./pages/ParticipationRecall";
 import Playground from "./pages/Playground";
 import axios from "axios";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -45,8 +43,6 @@ function App() {
           element={<ParticipationRecall users={users} />}
         />
         <Route path="/playground" element={<Playground />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   );

@@ -55,7 +55,7 @@ export default function Playground() {
                   borderStyle: "solid",
                   borderWidth: "1px",
                   padding: "3px",
-                  width: "893px",
+                  width: "65.5vw",
                 }}
               >
                 Playground

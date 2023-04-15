@@ -4,8 +4,8 @@ import axios from "axios";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -14,8 +14,8 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
-      email,
-      password,
+      // email,
+      // password,
       username,
       location,
     };
@@ -31,22 +31,22 @@ export default function Signup() {
   };
   //
 
-  const handleEmail = (e) => setEmail(e.target.value);
+  // const handleEmail = (e) => setEmail(e.target.value);
   const handleUsername = (e) => setUsername(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
+  // const handlePassword = (e) => setPassword(e.target.value);
   const handleLocation = (e) => setLocation(e.target.value);
 
   return (
     <>
       <h1>Signup</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email: </label>
-        <input type="text" value={email} onChange={handleEmail} />
+        {/* <label htmlFor="email">Email: </label>
+        <input type="text" value={email} onChange={handleEmail} /> */}
 
-        <label htmlFor="password">Password: </label>
-        <input type="password" value={password} onChange={handlePassword} />
+        {/* <label htmlFor="password">Password: </label>
+        <input type="password" value={password} onChange={handlePassword} /> */}
 
-        <label htmlFor="username">username: </label>
+        <label htmlFor="username">name: </label>
         <input type="text" value={username} onChange={handleUsername} />
 
         <label htmlFor="location">location: </label>

@@ -70,10 +70,10 @@ export default function Home({ usersWithCompositions }) {
                   borderStyle: "solid",
                   borderWidth: "1px",
                   padding: "3px",
-                  width: "943px",
+                  width: "65.5vw",
                 }}
               >
-                Last user participation
+                Last user participation:
               </fieldset>
 
               <CompositionRecall

@@ -9,8 +9,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const {username, password, email, location, compositions } = req.body
-  User.create({username, password, email, location, compositions })
+  const {username, email, location, compositions } = req.body
+  User.create({username, email, location, compositions })
   .then(user => {
     res.status(201).json(user)
   })
