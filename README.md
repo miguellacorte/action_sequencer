@@ -1,6 +1,6 @@
 # Action Sequencer
 
-The Action Sequencer is an online music sequencer designed to explore new forms of interactive collective creation and online distribution. It allows users to create and share a constellation of synth sequences and then play them back. The last sequence created is displayed on the homepage until a new one is created.
+The Action Sequencer is an online music sequencer designed to explore new forms of interactive collective creation and online music distribution. It allows users to create and share a constellation of synth sequences and then play them back. The last sequence created is displayed on the homepage until a new one is created.
 
 ![PreviewImg](https://raw.githubusercontent.com/miguellacorte/action_sequencer/main/Screenshot%202023-04-21%20at%2019.04.11.png)
 
